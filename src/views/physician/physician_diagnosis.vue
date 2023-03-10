@@ -27,7 +27,7 @@
         <el-input v-model="medical_record.charge" placeholder="请输入体格检查"></el-input>
       </el-descriptions-item>
       <el-descriptions-item label="诊断">
-        <el-table :data="medical_record.disease" style="width: 100%;">
+        <el-table :data="medical_record.disease" style="width: 100%;" @selection-change="delDiseaseSelection">
           <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="disease_code" label="疾病编码" width="180"></el-table-column>
           <el-table-column prop="disease_name" label="疾病名称" width="180"></el-table-column>
@@ -35,7 +35,7 @@
           <el-table-column prop="disease_category" label="疾病所属分类" width="180"></el-table-column>
           <el-table-column>
             <template slot="header" slot-scope="scope">
-              <el-button type="warning">删除</el-button>
+              <el-button type="warning" @click="delDisease">删除</el-button>
               <el-button @click="dialogTableVisible = true">增加</el-button>
             </template>
           </el-table-column>
@@ -51,7 +51,7 @@
     </el-descriptions>
     <el-divider/>
     <div style="text-align: left">
-      <el-button type="primary" @click="saveMsg()">保存</el-button>
+      <el-button type="primary" @click="saveMsg">保存</el-button>
       <el-button @click="clear()">清空</el-button>
     </div>
 
@@ -87,15 +87,31 @@
 
 <script>
 import qs from "qs";
+import index from "vuex";
 
 export default {
   name: "physician_diagnosis",
   methods:{
     saveMsg(){
+      this.medical_record.register_id = this.patient.id
+      this.$http.post("http://localhost:8082/physician/addDiseaseMsg",qs.stringify(this.medical_record)).then(
+          (res) => {
 
+          }
+      )
     },
     clear(){
 
+    },
+    //删除疾病
+    delDisease(){
+        this.medical_record.disease.forEach((value,index)=>{
+          this.temp_disease.forEach((v,i)=>{
+            if(value.disease_name === v.disease_name){
+              this.medical_record.disease.splice(index,1);
+            }
+          })
+        })
     },
     //搜索疾病
     searchDisease(){
@@ -109,6 +125,10 @@ export default {
     diseaseSelectionChange(selVal){
       this.temp_disease = selVal;
       console.log(this.temp_disease);
+    },
+    //删除选的疾病
+    delDiseaseSelection(selVal){
+      this.temp_disease = selVal;
     },
     //将选择的疾病加到病例中
     addSelectionDisease(){
@@ -131,7 +151,6 @@ export default {
         history: '',
         allergy: '',
         charge: '',
-        temp: '',
         proposal: '',
         careful: '',
         disease:[]//诊断（对话框选择后的 疾病信息）

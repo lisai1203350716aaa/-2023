@@ -133,7 +133,9 @@ export default {
     //将选择的疾病加到病例中
     addSelectionDisease(){
       if(this.temp_disease != null){
-        this.medical_record.disease.push(this.temp_disease[0])
+        for (let i = 0;i<this.temp_disease.length;i++){
+          this.medical_record.disease.push(this.temp_disease[i])
+        }
       }
     }
   },

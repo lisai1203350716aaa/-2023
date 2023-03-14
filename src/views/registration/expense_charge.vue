@@ -50,12 +50,14 @@
     <el-divider/>
     <div align="left">
       <el-button type="primary" disabled icon="el-icon-price-tag">项目金额：{{ total_price }}</el-button>
+      <el-button type="primary" icon="el-icon-price-tag" @click="expenseCharge">收費結算</el-button>
       <el-table style="margin-top: 10px;width: 90%" :data="price_project_table" @selection-change="priceSelectChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="item_name" label="项目名称"></el-table-column>
-        <el-table-column prop="item_price" label="单价" width="80"></el-table-column>
+        <el-table-column prop="item_price" label="单价" width="100"></el-table-column>
+        <el-table-column prop="item_type" label="類型" width="100"></el-table-column>
         <el-table-column prop="item_format" label="规格" width="200"></el-table-column>
-        <el-table-column prop="item_number" label="数量" width="80"></el-table-column>
+        <el-table-column prop="item_number" label="数量" width="100"></el-table-column>
         <el-table-column prop="item_create_time" label="开立时间" width="200"></el-table-column>
       </el-table>
     </div>
@@ -69,7 +71,8 @@ export default {
   name: "expense_charge",
   data() {
     return {
-      total_price:0,
+      expense_charge_msg: [],
+      total_price: 0,
       price_project_table: [],
       case_number: '',
       real_name: '',
@@ -80,13 +83,31 @@ export default {
     }
   },
   methods: {
-    priceSelectChange() {
-      this.total_price = 0;
-      for (let i = 0; i < this.price_project_table.length; i++) {
-        this.total_price = (parseFloat(this.price_project_table[i].item_price) + this.total_price);
-      }
-      //取小数点后两位
-      this.total_price.toFixed(2)
+    //收費
+    expenseCharge() {
+      this.$confirm("本次收費金額為：" + this.total_price, "收費窗口", {
+        confirmButtonText: "收費",
+        cancelButtonText: "取消"
+      }).then(() => {
+        this.$http.post("http://localhost:8082/expenseCharge/ExCharge", this.expense_charge_msg).then(
+            (res) => {
+              this.$message({
+                type: "success",
+                message: res.data.msg
+              })
+              this.searchRegister();
+            }
+        ).catch(() => {
+          this.$message({
+            type: "info",
+            message: "收費取消"
+          })
+        })
+      })
+    },
+    priceSelectChange(val) {
+      this.expense_charge_msg = val;
+      this.math_total_price(val);
     },
     //根据病历号和患者名进行搜索
     searchRegister() {
@@ -94,8 +115,20 @@ export default {
           (res) => {
             this.patient = res.data.registerMap;
             this.price_project_table = res.data.requestList;
+            this.math_total_price();
           }
       )
+    },
+    math_total_price(total) {
+      this.total_price = 0;
+      for (let i = 0; i < total.length; i++) {
+        if (total[i].item_number == 'undefined' || total[i].item_number == null || total[i].item_number == '') {
+          this.total_price = this.total_price + parseFloat(total[i].item_price);
+        } else {
+          this.total_price = this.total_price + parseFloat(total[i].item_price) * total[i].item_number;
+        }
+      }
+      this.total_price = this.total_price.toFixed(2)
     }
   }
 }

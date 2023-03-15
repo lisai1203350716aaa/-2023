@@ -43,8 +43,8 @@ export default {
       )
     },
     //患者检查项目，选择哪个检查项
-    checkSelectionChange(){
-
+    checkSelectionChange(currentRow){
+      console.log(currentRow.tech_name)
     }
   },
   mounted() {

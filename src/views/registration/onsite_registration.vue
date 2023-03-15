@@ -170,7 +170,14 @@ export default {
       }
     },
     add() {
-      this.$http.post("http://localhost:8082/add/addRegister",qs.stringify(this.register));
+      this.$http.post("http://localhost:8082/add/addRegister",qs.stringify(this.register)).then(
+          (res)=>{
+              this.$message({
+                message:"success",
+                type:"success"
+              })
+          }
+      )
     },
     clear() {
       this.register.id = '',

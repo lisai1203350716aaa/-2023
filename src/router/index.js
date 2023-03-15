@@ -52,6 +52,16 @@ const routes = [
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/physician_patient.vue')
             },
             {
+                path: '/examination_apply_doc.vue',
+                name: '检查申请',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/examination_apply_doc.vue')
+            },
+            {
+                path: '/disponsal_apply_doc.vue',
+                name: '检验申请',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_apply_doc.vue')
+            },
+            {
                 path: '/physician_diagnosis',
                 name: '医生诊疗',
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/physician_diagnosis.vue')
@@ -70,7 +80,7 @@ const routes = [
         children: [
             {
                 path: '/examination_apply',
-                name: '检查申请',
+                name: '检查申请查看',
                 component: () => import(/* webpackChunkName: "about" */ '../views/examination/examination_apply.vue')
             },
             {
@@ -97,7 +107,7 @@ const routes = [
         children: [
             {
                 path: '/disponsal_apply',
-                name: '检验申请',
+                name: '检验申请查看',
                 component: () => import(/* webpackChunkName: "about" */ '../views/disponsal/disponsal_apply.vue')
             },
             {

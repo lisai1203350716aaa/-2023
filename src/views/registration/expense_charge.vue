@@ -94,16 +94,16 @@ export default {
               this.$message({
                 type: "success",
                 message: res.data.msg
-              })
+              });
               this.searchRegister();
-            }
-        ).catch(() => {
-          this.$message({
-            type: "info",
-            message: "收費取消"
-          })
-        })
-      })
+            })
+      }).catch((e) => {
+        console.log(e);
+        this.$message({
+          type: "info",
+          message: "收費取消"
+        });
+      });
     },
     priceSelectChange(val) {
       this.expense_charge_msg = val;
@@ -115,7 +115,7 @@ export default {
           (res) => {
             this.patient = res.data.registerMap;
             this.price_project_table = res.data.requestList;
-            this.math_total_price();
+            this.math_total_price(this.price_project_table);
           }
       )
     },

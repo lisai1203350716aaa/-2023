@@ -12,10 +12,10 @@
     <el-divider></el-divider>
     <el-row :gutter="20">
       <el-col :span="6">
-        <el-input v-model="wait_patient_name" placeholder="请输入患者姓名"></el-input>
+        <el-input v-model="input_patient_name" placeholder="请输入患者姓名"></el-input>
       </el-col>
       <el-col :span="6">
-        <el-input v-model="wait_patient_id" placeholder="请输入患者病历号"></el-input>
+        <el-input v-model="input_patient_id" placeholder="请输入患者病历号"></el-input>
       </el-col>
       <el-col :span="2">
         <el-button @click="getWaitPatientMsg(1)">搜索</el-button>
@@ -142,7 +142,7 @@ export default {
       employee_id: 1,
       finish_patient_count: 0,
       wait_patient_count: 0,
-      wait_patient_msg: []
+      wait_patient_msg: [],
     }
   }
 }

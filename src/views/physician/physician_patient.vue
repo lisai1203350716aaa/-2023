@@ -28,7 +28,7 @@
         style="width: 100%"
         :row-class-name="tableRowClassName">
       <el-table-column
-          prop="id"
+          type="index"
           label="编号"
           width="180">
       </el-table-column>

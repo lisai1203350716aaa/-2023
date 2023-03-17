@@ -54,30 +54,60 @@ const routes = [
         component: Layout,
         children: [
             {
+                path: '/physician_diagnosis',
+                name: '病例首页',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/physician_diagnosis.vue')
+            },
+            {
                 path: '/physician_patient',
                 name: '患者查看',
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/physician_patient.vue')
             },
             {
                 path: '/examination_apply_doc.vue',
-                name: '检查申请',
+                name: '医生诊疗:检查申请',
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/examination_apply_doc.vue')
             },
             {
                 path: '/disponsal_apply_doc.vue',
-                name: '检验申请',
+                name: '医生诊疗:检验申请',
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_apply_doc.vue')
-            },
-            {
-                path: '/physician_diagnosis',
-                name: '医生诊疗',
-                component: () => import(/* webpackChunkName: "about" */ '../views/physician/physician_diagnosis.vue')
             },
             {
                 path: '/physician_history',
                 name: '看诊记录',
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/physician_history.vue')
-            }
+            },
+            {
+                path: '/examination_result_doc',
+                name: '医生诊疗:检查结果',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/examination_result_doc.vue')
+            },
+            {
+                path: '/disponsal_result_doc',
+                name: '医生诊疗:检验结果',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_result_doc.vue')
+            },
+            {
+                path: '/outpatient_diagnosis_doc',
+                name: '医生诊疗:门诊确诊',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/outpatient_diagnosis_doc.vue')
+            },
+            {
+                path: '/disponsal_result_doc',
+                name: '医生诊疗:开设处方',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_result_doc.vue')
+            },
+            {
+                path: '/disponsal_result_doc',
+                name: '医生诊疗:处置申请',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_result_doc.vue')
+            },
+            {
+                path: '/disponsal_result_doc',
+                name: '医生诊疗:费用查询',
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_result_doc.vue')
+            },
         ]
     },
     {

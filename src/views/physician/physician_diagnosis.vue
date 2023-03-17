@@ -5,7 +5,6 @@
       <el-tag>患者病历号：{{ patient.case_number }}</el-tag>
       <el-tag>患者年龄：{{ patient.age }}</el-tag>
       <el-tag>患者性别：{{ patient.gender }}</el-tag>
-
     </div>
     <el-descriptions title="病案首页" :column="1" border style="margin-top: 20px">
       <el-descriptions-item label="主诉" :labelStyle="{'width':'110px'}">

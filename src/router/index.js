@@ -99,9 +99,9 @@ const routes = [
                 component: () => import(/* webpackChunkName: "about" */ '../views/physician/write_prescription_doc.vue')
             },
             {
-                path: '/disponsal_result_doc',
+                path: '/handle_apply_doc',
                 name: '医生诊疗:处置申请',
-                component: () => import(/* webpackChunkName: "about" */ '../views/physician/disponsal_result_doc.vue')
+                component: () => import(/* webpackChunkName: "about" */ '../views/physician/handle_apply_doc.vue')
             },
             {
                 path: '/disponsal_result_doc',

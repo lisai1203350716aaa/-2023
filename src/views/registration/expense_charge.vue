@@ -55,9 +55,8 @@
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="item_name" label="项目名称"></el-table-column>
         <el-table-column prop="item_price" label="单价" width="100"></el-table-column>
-        <el-table-column prop="item_type" label="類型" width="100"></el-table-column>
+        <el-table-column prop="item_type" label="类型" width="100"></el-table-column>
         <el-table-column prop="item_format" label="规格" width="200"></el-table-column>
-        <el-table-column prop="item_number" label="数量" width="100"></el-table-column>
         <el-table-column prop="item_create_time" label="开立时间" width="200"></el-table-column>
       </el-table>
     </div>

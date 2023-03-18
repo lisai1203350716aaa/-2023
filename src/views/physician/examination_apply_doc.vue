@@ -109,13 +109,15 @@ export default {
     },
     //删除
     delSelectMsg() {
-      this.check_request_table.forEach((value, index) => {
-        this.temp_check.forEach((v, i) => {
-          if (value.tech_name === v.tech_name) {
-            this.check_request_table.splice(index, 1)
+      if((this.check_request_table != null && this.check_request_table.length)&&(this.temp_check != null && this.temp_check.length > 0)){
+        for (let i = 0; i < this.check_request_table.length; i++) {
+          for (let j = 0; j < this.temp_check.length; j++) {
+            if(this.check_request_table[i].tech_code == this.temp_check[j].tech_code){
+              this.check_request_table.splice(i,1)
+            }
           }
-        })
-      })
+        }
+      }
       this.math_total_price();
     },
     //计算添加的检查项目金额

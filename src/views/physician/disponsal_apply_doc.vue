@@ -110,13 +110,15 @@ export default {
     },
     //删除
     delSelectMsg() {
-      this.disposal_request_table.forEach((value, index) => {
-        this.temp_check.forEach((v, i) => {
-          if (value.tech_name === v.tech_name) {
-            this.disposal_request_table.splice(index, 1)
+      if((this.disposal_request_table != null && this.disposal_request_table.length)&&(this.temp_check != null && this.temp_check.length > 0)){
+        for (let i = 0; i < this.disposal_request_table.length; i++) {
+          for (let j = 0; j < this.temp_check.length; j++) {
+            if(this.disposal_request_table[i].tech_code == this.temp_check[j].tech_code){
+              this.disposal_request_table.splice(i,1)
+            }
           }
-        })
-      })
+        }
+      }
       this.math_total_price();
     },
     //计算添加的检验项目金额
@@ -144,6 +146,7 @@ export default {
     addSelectMsg() {
       if (this.temp_check != null && this.temp_check.length > 0) {
         for (let i = 0; i < this.temp_check.length; i++) {
+          this.disposal_request_table.drug_number = 1;
           this.disposal_request_table.push(this.temp_check[i])
         }
       }
